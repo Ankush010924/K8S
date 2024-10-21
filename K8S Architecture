@@ -1,0 +1,58 @@
+K8S Architecture 
+In Kubernetes, the architecture is generally divided into two main planes: the data plane and the control plane. Each has distinct components and responsibilities.
+
+A) Control Plane
+The control plane manages the overall state of the Kubernetes cluster. It is responsible for making decisions about the cluster (e.g., scheduling, scaling) and for detecting and responding to cluster events (like starting or stopping applications). Key components include:
+
+a) Kube-API Server:
+
+Acts as the central management point for the cluster.
+Exposes the Kubernetes API, which other components use to communicate.
+
+b) etcd:
+
+A distributed key-value store that holds the configuration data and state of the cluster.
+Ensures that the current state of the cluster can be restored and is consistent.
+
+c) Kube Controller Manager:
+
+Runs controllers that regulate the state of the cluster. For example, it manages replication controllers and endpoints.
+Ensures that the desired state (as defined by the user) matches the current state.
+
+d) Kube Scheduler:
+
+Responsible for assigning pods to nodes based on resource requirements, availability, and constraints.
+Makes scheduling decisions to optimize resource utilization.
+
+e) Cloud Controller Manager (if applicable):
+
+Interfaces with cloud providers to manage cloud-specific resources.
+Handles tasks such as managing load balancers or persistent storage.
+
+B) Data Plane
+The data plane consists of the components that actually run applications and manage their workloads. It includes the nodes (physical or virtual machines) that execute the containers and their associated resources. Key components include:
+
+a) Kubelet:
+
+An agent that runs on each node in the cluster.
+Responsible for managing the lifecycle of containers, ensuring that they are running and healthy according to the specifications in the Pod definitions.
+
+b) Kube Proxy:
+
+Manages network routing for services, allowing for communication between pods and external clients.
+Handles service discovery and load balancing by maintaining network rules.
+
+c) Container Runtime:
+
+The software responsible for running containers. Examples include Docker, containerd, and CRI-O.
+Executes the container images and manages their lifecycle on the node.
+
+d) Pods:
+
+The smallest deployable units in Kubernetes, which can encapsulate one or more containers.
+Each pod runs in a specific namespace and has its own networking and storage configurations.
+
+Summary
+Control Plane: Manages the cluster state, makes decisions, and provides APIs for interaction.
+Data Plane: Runs the applications and workloads, managing their lifecycle and networking.
+Together, these planes work to ensure that Kubernetes can efficiently deploy, manage, and scale applications in a distributed environment.
